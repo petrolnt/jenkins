@@ -1,8 +1,7 @@
 package net.petrolnt.utilities
 class Utilities implements Serializable {
 
-  static def checkOutFrom(repo) {
-    git(url: repo)
+  static def checkOutFrom(branchesList, credentials, repo) {
+    git([branches: branchesList, credentialsId: credentials, url: repo)
   }
-
 }
