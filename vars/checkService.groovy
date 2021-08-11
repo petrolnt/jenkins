@@ -1,9 +1,9 @@
 def call(body) {
     // Check service
-    def mainUrl = "http://192.168.1.60/"
-    //def get = new URL("http://192.168.1.60").openConnection();
-    //def getRC = get.getResponseCode();
-    if (checkUrl(mainUrl).equals(200)) {
+    def strBaseUrl = "http://192.168.1.60/"
+    def get = new URL(strBaseUrl).openConnection();
+    def getRC = get.getResponseCode();
+    if (getRC.equals(200)) {
         println("Service is running")
         currentBuild.result = 'SUCCESS'
     }
@@ -11,13 +11,11 @@ def call(body) {
         println("Service not started")
         currentBuild.result = 'FAILURE'
     }
-    // Check service health
-    //get = new URL("http://192.168.1.60/health").openConnection();
-    //getRC = get.getResponseCode();
-    def healthResponse = checkUrl(mainUrl + "health")
+    def healthResponse = URL(mainUrl + "health").openConnection()
     if (healthResponse.equals(500)) {
         println("Service status is unhealthy. Try to restore")
-        if (checkUrl(mainUrl + "make-healthy").equals(200) && checkUrl(mainUrl + "health").equals(200)){
+        if ((new URL(strBaseUrl + "make-healthy")).openConnection().equals(200) &&
+                (new URL(strBaseUrl + "health")).openConnection().equals(200)){
             println("Service status restored")
             currentBuild.result = 'SUCCESS'
         }
@@ -32,10 +30,4 @@ def call(body) {
         currentBuild.result = 'FAILURE'
     }
     return this
-}
-
-def checkUrl(url){
-    def get = new URL(url).openConnection();
-    def getRC = get.getResponseCode();
-    return getRC
 }
