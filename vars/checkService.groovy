@@ -1,6 +1,6 @@
 def call(body) {
     // GET
-    def get = new URL("http://localhost").openConnection();
+    def get = new URL("http://192.168.1.60").openConnection();
     def getRC = get.getResponseCode();
     println(getRC);
     if (getRC.equals(200)) {
