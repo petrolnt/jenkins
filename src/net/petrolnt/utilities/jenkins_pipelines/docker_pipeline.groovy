@@ -1,4 +1,5 @@
-@Library('utils@main') import net.petrolnt.utilities.*
+//@Library('utils@main') import net.petrolnt.utilities.*
+@Library('utils@main')_
 
 pipeline { 
     environment { 
@@ -40,6 +41,12 @@ pipeline {
                 script{
                     kubernetesDeploy(configs: "kuber/app.yaml", kubeconfigId: "test_eks1")
                 }
+            }
+        }
+        
+        stage('Check service'){
+            steps{
+                checkService()
             }
         }
         
