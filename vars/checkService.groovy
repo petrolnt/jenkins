@@ -11,8 +11,8 @@ def call(body) {
         currentBuild.result = 'FAILURE' 
     }
     // Check service health
-    def get = new URL("http://192.168.1.60/health").openConnection();
-    def getRC = get.getResponseCode();
+    get = new URL("http://192.168.1.60/health").openConnection();
+    getRC = get.getResponseCode();
     if (getRC.equals(200)) {
         println("Service status is healthy")
         currentBuild.result = 'SUCCESS' 
