@@ -1,6 +1,6 @@
 def call(body) {
     // Check service
-    def strBaseUrl = "http://192.168.1.60/"
+    def strBaseUrl = "http://192.168.1.60"
     def get = new URL(strBaseUrl).openConnection();
     def getRC = get.getResponseCode();
     if (getRC.equals(200)) {
@@ -14,8 +14,8 @@ def call(body) {
     def healthResponse = URL(mainUrl + "health").openConnection()
     if (healthResponse.equals(500)) {
         println("Service status is unhealthy. Try to restore")
-        if ((new URL(strBaseUrl + "make-healthy")).openConnection().equals(200) &&
-                (new URL(strBaseUrl + "health")).openConnection().equals(200)){
+        if ((new URL(strBaseUrl + "/make-healthy")).openConnection().equals(200) &&
+                (new URL(strBaseUrl + "/health")).openConnection().equals(200)){
             println("Service status restored")
             currentBuild.result = 'SUCCESS'
         }
