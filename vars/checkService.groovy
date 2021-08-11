@@ -5,11 +5,11 @@ def call(body) {
     //def getRC = get.getResponseCode();
     if (checkUrl(mainUrl).equals(200)) {
         println("Service is running")
-        currentBuild.result = 'SUCCESS' 
+        currentBuild.result = 'SUCCESS'
     }
     else {
         println("Service not started")
-        currentBuild.result = 'FAILURE' 
+        currentBuild.result = 'FAILURE'
     }
     // Check service health
     //get = new URL("http://192.168.1.60/health").openConnection();
@@ -26,10 +26,10 @@ def call(body) {
             currentBuild.result = 'FAILURE'
         }
     }
-    else if(!healthResponse.equal(200){
+    else if(!healthResponse.equal(200)){
         println("Service status is unhealthy")
         println("Responce code is: " + getRC)
-        currentBuild.result = 'FAILURE' 
+        currentBuild.result = 'FAILURE'
     }
     return this
 }
