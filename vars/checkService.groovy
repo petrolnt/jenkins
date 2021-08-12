@@ -11,7 +11,7 @@ def call(body) {
         println("Service not started")
         currentBuild.result = 'FAILURE'
     }
-    def healthResponse = URL(mainUrl + "health").openConnection()
+    def healthResponse = new URL(mainUrl + "health").openConnection()
     if (healthResponse.equals(500)) {
         println("Service status is unhealthy. Try to restore")
         if ((new URL(strBaseUrl + "/make-healthy")).openConnection().equals(200) &&
