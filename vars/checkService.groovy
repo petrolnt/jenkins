@@ -12,6 +12,7 @@ def call(body) {
         currentBuild.result = 'FAILURE';
     }
     def healthResponse = new URL(strBaseUrl + "/health").openConnection();
+    println("Health response is: " + healthResponse)
     if (healthResponse.equals(500)) {
         println("Service status is unhealthy. Try to restore");
         if ((new URL(strBaseUrl + "/make-healthy")).openConnection().equals(200) &&
