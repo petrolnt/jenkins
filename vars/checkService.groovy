@@ -24,7 +24,7 @@ def call(body) {
             currentBuild.result = 'FAILURE';
         }
     }
-    else if(!(healthResponse.equal(200))){
+    else if(!(healthResponse.equals(200))){
         println("Service status is unhealthy");
         println("Responce code is: " + healthResponse);
         currentBuild.result = 'FAILURE';
