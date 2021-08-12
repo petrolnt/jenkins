@@ -11,12 +11,12 @@ def call(body) {
         println("Service not started");
         currentBuild.result = 'FAILURE';
     }
-    def healthResponse = new URL(strBaseUrl + "/health").openConnection();
+    def healthResponse = new URL(strBaseUrl + "/health").openConnection().getResponseCode();
     println("Health response is: " + healthResponse)
     if (healthResponse.equals(500)) {
         println("Service status is unhealthy. Try to restore");
-        if ((new URL(strBaseUrl + "/make-healthy")).openConnection().equals(200) &&
-                (new URL(strBaseUrl + "/health")).openConnection().equals(200)){
+        if ((new URL(strBaseUrl + "/make-healthy")).openConnection().getResponseCode().equals(200) &&
+                (new URL(strBaseUrl + "/health")).openConnection().getResponseCode().equals(200)){
             println("Service status restored");
             currentBuild.result = 'SUCCESS';
         }
